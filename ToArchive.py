@@ -96,7 +96,7 @@ def main() -> None:
     target_path = cur_name.parent
     config = parse_config(read_config(target_path), target_path=target_path)
     new_name = add_date_to_filename(cur_name)
-    cprint(f'Архивируем файл {str(cur_name)} с новым именем {str(new_name.name)}')
+    cprint(f'20Архивируем файл ^14_{str(cur_name)} ^20_с новым именем ^13_{str(new_name.name)}')
     archive = add_to_archive(config, cur_name=cur_name, new_name=new_name)
     logger.info(f'Файл {str(cur_name.name)} добавлен в архив {str(archive)}')
 
