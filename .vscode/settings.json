@@ -1,0 +1,153 @@
+{
+    // рабочая папка проекта (глубже чем сам корень проекта)
+    //"terminal.integrated.cwd": "app",
+
+
+    // --- Command Prompt
+    // "terminal.integrated.shellArgs.windows": [
+    //     ""
+    // ],
+
+    // --- Git Bash
+    // "terminal.integrated.shellArgs.windows": ["--cd=C:/Server/data/htdocs/flask_blog/app"]
+    // "terminal.integrated.shellArgs.windows": [
+    // "--cd=C:/Server/data/htdocs/flask_blog/app",
+    // "-c",
+    // "source C:/Server/venv_flask3/Scripts/activate"
+    // "python main.py"
+    // ],
+
+
+    // "python.pythonPath": "C:\\Python312\\python.exe",
+    "python.pythonPath": "env\\Scripts\\python.exe",
+    "python.terminal.activateEnvironment": true,
+    //"terminal.integrated.env.windows": null,
+
+    "python.venvFolders": [
+        "env"
+    ],
+    "python.venvPath": "env\\Scripts\\python.exe",
+    // "python.terminal.activateEnvInCurrentTerminal": true,
+
+    "window.zoomLevel": 0,
+    //"files.autoSaveDelay": 1000,
+    //"files.encoding": "utf8",
+    //"files.eol": "auto",  //  - \n: LF    \r\n: CRLF
+
+    // удалять завершающие пробелы
+    // "files.trimTrailingWhitespace": true,
+    "[markdown]": {
+        // "files.trimFinalNewlines": false,
+        "files.trimTrailingWhitespace": false
+    },
+    "[html]": {
+        "files.trimTrailingWhitespace": false
+    },
+
+    // исключаем файлы и папки
+    "files.exclude": {
+        //".vscode/": true,
+        "**/__pycache__/": true,
+        ".mypy_cache": true,
+        ".pytest_cache/": true,
+        "venv/": true,
+        "env/": true,
+        "logs/": false,
+        "**/*.ico": true,
+        "**/*.bat": true,
+        "**/*.exe": true,
+        "**/*.png": true,
+        "**/*.jpg": true,
+        "**/*.webm": true,
+        "**/*.xls": true,
+        "**/*.doc": true,
+        "**/*.xlsx": true,
+        "**/*.docx": true,
+        "**/*.pdf": true,
+        "**/*.csv": true,
+        "**/*.xml": true,
+        "**/*.mp4": true,
+        "**/*.mkv": true,
+        "**/*.avi": true,
+        "**/*.wav": true,
+        "**/*.mp3": true,
+        "**/*.m4a": true,
+        "**/*.zip": true,
+        "**/*.7z": true,
+        "**/*.rar": true,
+        "**/*.tar.gz": true,
+        "zProjectDevelopment/[^_]**": true,
+        "zProjectDevelopment/_[^P]**": true,
+        "LICENSE*": true,
+    },
+    "search.exclude": {
+        "**/__pycache__/": true,
+        ".mypy_cache": true,
+        ".pytest_cache/": true,
+        "venv/": true,
+        "env/": true,
+        ".vscode/": true,
+        "logs/": true,
+        "**/*.ico": true,
+        "**/*.bat": true,
+        "**/*.exe": true,
+        "**/*.png": true,
+        "**/*.jpg": true,
+        "**/*.webm": true,
+        "**/*.xls": true,
+        "**/*.doc": true,
+        "**/*.xlsx": true,
+        "**/*.docx": true,
+        "**/*.pdf": true,
+        "**/*.csv": true,
+        "**/*.xml": true,
+        "**/*.mp4": true,
+        "**/*.mkv": true,
+        "**/*.avi": true,
+        "**/*.wav": true,
+        "**/*.mp3": true,
+        "**/*.m4a": true,
+        "**/*.zip": true,
+        "**/*.7z": true,
+        "**/*.rar": true,
+        "**/*.tar.gz": true,
+        "zProjectDevelopment/*": true,
+        "LICENSE*": true,
+    },
+
+    // линтер python
+    "flake8.args": ["--config=.flake8"],
+    "python.analysis.ignore": [
+        "*"
+    ],
+
+    // Pylance
+    "python.analysis.typeCheckingMode": "basic",
+
+    // mypy
+    // включить автоматическую проверку типов mypy при открытии файла
+    // "python.linting.enabled": true,
+    // "python.linting.mypyEnabled": true,
+    // "python.linting.mypyCategorySeverity.error":"Warning",
+    // "python.linting.mypyArgs": [
+    //     "--ignore-missing-imports",
+    //     "--follow-imports=silent",
+    //     "--show-column-numbers",
+    //     "--disallow-untyped-defs",
+    //     "--disallow-untyped-calls"
+    // ],
+    "mypy-type-checker.args": [
+        "--ignore-missing-imports",
+        "--follow-imports=silent",
+        "--show-column-numbers",
+        "--disallow-untyped-defs",
+        "--disallow-untyped-calls",
+        // "--follow-untyped-imports"
+    ],
+
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": false,
+}

@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+
+import sys
+
+try:
+    from configs.config import config
+except ModuleNotFoundError:
+    from pathlib import Path
+
+    class FakerConf:
+        PATH_LOGS_ERR = Path('.')
+        PATH_LOGS = Path(__file__).parent.parent / 'logs'
+        LOGGER_PREFIX = 'to_archive'
+        LOGGER_NAME_MODULE = True
+    config: FakerConf = FakerConf  # type: ignore [no-redef]
+from loguru import logger
+
+
+FILENAME_LOG_MAIN = config.PATH_LOGS / f'{config.LOGGER_PREFIX}.log'
+FILENAME_LOG_ERR = config.PATH_LOGS_ERR / f'{config.LOGGER_PREFIX}_error_{{time:YYYY-MM-DD}}.log'
+
+
+# исправление цвета INFO на windows с серой консолью
+logger.level('INFO', color='<light-white><bold>')
+logger.level('CRITICAL', color='<RED><white><bold>')
+
+# добавляем свои уровни 'SUCCESS API', 'SUCCESS API F', 'FAIL'
+logger.level('SUCCESS API', no=26, color='<green>', icon='@')
+logger.level('SUCCESS API F', no=27, color='<green>', icon='@')
+logger.level('FAIL', no=28, color='<light-magenta>', icon='@')
+
+# удаляем начальный логгер и создаём свой базовый логгер с уровнем default LOGURU_LEVEL 'DEBUG'
+logger.remove()
+name_module = '{name}-' if config.LOGGER_NAME_MODULE else ''
+new_format = '<light-blue>{time:YYYY-MM-DD HH:mm:ss.SSS}</light-blue> | <lvl>{level: <8}</lvl> | <cyan>%s{line}</cyan>- <lvl>{message}</lvl>' % name_module
+# logger.add(sys.stdout, format=new_format)
+# вариант не выводить в консоль уровень SUCCESS API F
+logger.add(sys.stdout, format=new_format, filter=lambda record: record['level'].name != 'SUCCESS API F')
+
+# добавляем логгеры с дефолтным форматированием для вывода в файлы
+logger.add(FILENAME_LOG_MAIN,
+           filter=lambda record: record['level'].no <= 30,
+           rotation='00:00',
+           compression='zip',
+           delay=True)
+logger.add(FILENAME_LOG_ERR,
+           filter=lambda record: record['level'].no >= 30,
+           rotation='00:00',
+           compression='zip',
+           delay=True)
+
+
+def _exemples() -> None:
+    logger.trace('Hello, World (trace)!')
+    logger.debug('Hello, World (debug)!')
+    logger.info('Hello, World (info)!')
+    logger.success('Hello, World (success)!')
+    logger.warning('Hello, World (warning)!')
+    logger.error('Hello, World (error)!')
+    logger.critical('Hello, World (critical)!')
+    logger.log('FAIL', 'No data recorded!')
+    logger.log('SUCCESS API', 'Time spent 0:00:00')
+    print()
+
+
+def create_dir_log() -> None:
+    if not (config.PATH_LOGS.exists() and config.PATH_LOGS.is_dir()):
+        config.PATH_LOGS.mkdir()
+
+
+create_dir_log()
+
+if __name__ == '__main__':
+    import os
+    width = 120
+    hight = 50
+    # os.system('color 71')
+    os.system('mode con cols=%d lines=%d' % (width, hight))
+    os.system('powershell -command "&{$H=get-host;$W=$H.ui.rawui;$B=$W.buffersize;$B.width=%d;$B.height=%d;$W.buffersize=$B;}"' % (width, 4000))
+    _exemples()

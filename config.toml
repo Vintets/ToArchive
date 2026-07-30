@@ -1,0 +1,3 @@
+[main]
+path_to_archive = 'Архивы'
+archive_name = 'supertest'

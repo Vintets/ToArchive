@@ -1,0 +1,35 @@
+
+# расположение
+#WIN#
+cd %YandexDisk%/_Projects_Py/ToArchive
+
+
+# запуск
+python ToArchive.py test.txt
+python %YandexDisk%/_Projects_Py/ToArchive/ToArchive.py test.txt
+
+
+# ======================================================================================================================
+            *** Git ***
+
+Проект ToArchive
+    cd "$YandexDisk/_Projects_Py/ToArchive"
+    git remote add origin git@github.com:Vintets/ToArchive.git
+    # добавить привязку ко 2 репозиторию bb (bitbucket) отдельно
+    git remote add bb git@bitbucket.org:Vintets/toarchive.git
+
+    git it
+    git push -u origin master
+    git push origin master
+
+
+
+# ======================================================================================================================
+            *** Анализ ***
+
+
+
+
+
+// *********************************************************************************************************************
+# ======================================================================================================================
