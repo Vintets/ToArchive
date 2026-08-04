@@ -44,7 +44,7 @@ def validate_transferred_argument(arg: str) -> Path:
     if not file_in.exists():
         raise err.FileNotExistError(str(file_in))
     elif not file_in.is_file():
-        raise err.NotFileError(str(file_in))
+        raise err.ArgumentIsNotFileError(str(file_in))
     return file_in
 
 
@@ -120,7 +120,7 @@ if __name__ == '__main__':
         exit_from_program(code=0)
     except (err.ArgumentNotPassedError,
             err.FileNotExistError,
-            err.NotFileError,
+            err.ArgumentIsNotFileError,
             err.FileIsLockedError,
             ) as e:
         logger.error(e)

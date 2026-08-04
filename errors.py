@@ -33,7 +33,7 @@ class ArgumentIsFolderError(Exception):
         return self.msg
 
 
-class NotFileError(Exception):
+class ArgumentIsNotFileError(Exception):
     """Error this is not a file."""
     def __init__(self, arg: str) -> None:
         super().__init__(arg)
