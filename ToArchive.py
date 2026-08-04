@@ -16,6 +16,7 @@ from functools import lru_cache
 # import json
 from pathlib import Path
 import sys
+from time import sleep
 import tomllib
 from typing import Any
 
@@ -113,6 +114,7 @@ if __name__ == '__main__':
 
     try:
         main()
+        sleep(5)
     except KeyboardInterrupt:
         logger.info('Отмена. Скрипт остановлен.')
         exit_from_program(code=0)
