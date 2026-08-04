@@ -105,10 +105,10 @@ def main() -> None:
 if __name__ == '__main__':
     init_console(width=120, hight=50)
     check_version(version=(3, 12, 0))
-    PATH_SCRIPT = Path(__file__).parent
+    # PATH_SCRIPT = Path(__file__).parent
     # print(f'PATH_SCRIPT {PATH_SCRIPT}')
     # os.chdir(PATH_SCRIPT)
-    print(Path.cwd())
+    # print(Path.cwd())
 
     authorship(__author__, __title__, __version__, __copyright__)  # width=_width
 

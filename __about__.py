@@ -1,7 +1,7 @@
 __title__ = '--- ToArchive ---'
 __description__ = 'Added date to name file and added file to archive'
 __url__ = 'https://github.com/Vintets/ToArchive'
-__version_info__ = ('1', '0', '2')
+__version_info__ = ('1', '0', '3')
 __version__ = '.'.join(__version_info__)
 __author__ = 'master by Vint'
 __author_email__ = 'programmer@vintets.ru'
