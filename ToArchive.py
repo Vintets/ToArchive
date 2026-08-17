@@ -28,7 +28,7 @@ import py7zr
 
 
 CONFIG_FILE = 'config.toml'
-CONFIG_SECTION = 'main'
+CONFIG_MAIN_SECTION = 'main'
 
 
 def get_transferred_argument() -> str:
@@ -53,12 +53,12 @@ def read_config(target_path: Path) -> dict[str, Any]:
     try:
         with open(target_path.joinpath(CONFIG_FILE), 'rb') as f:
             conf_data = tomllib.load(f)
-            config: dict[str, Any] = conf_data[CONFIG_SECTION]
+            config: dict[str, Any] = conf_data[CONFIG_MAIN_SECTION]
     except FileNotFoundError:
         print('Файл конфига не найден')
         config = {}
     except KeyError:
-        raise err.NotSECTIONError(CONFIG_SECTION, tuple(conf_data.keys()))
+        raise err.NotSECTIONError(CONFIG_MAIN_SECTION, tuple(conf_data.keys()))
     return config
 
 
