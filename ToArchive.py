@@ -52,17 +52,18 @@ def validate_transferred_argument(arg: str) -> Path:
 def read_config(target_path: Path) -> dict[str, Any]:
     try:
         with open(target_path.joinpath(CONFIG_FILE), 'rb') as f:
-            conf_data = tomllib.load(f)
-            config: dict[str, Any] = conf_data[CONFIG_MAIN_SECTION]
+            config = tomllib.load(f)
+            _ = config[CONFIG_MAIN_SECTION]
     except FileNotFoundError:
         print('Файл конфига не найден')
         config = {}
     except KeyError:
-        raise err.NotSECTIONError(CONFIG_MAIN_SECTION, tuple(conf_data.keys()))
+        raise err.NotSECTIONError(CONFIG_MAIN_SECTION, tuple(config.keys()))
     return config
 
 
-def parse_config(config: dict[str, Any], target_path: Path) -> dict[str, Any]:
+def parse_config(config: dict[str, Any], section: str, target_path: Path) -> dict[str, Any]:
+    config = config.get(section, config[CONFIG_MAIN_SECTION])
     config['output_folder'] = target_path.joinpath(config.get('path_to_archive', ''))
     print_config(config)
     return config
@@ -95,7 +96,7 @@ def main() -> None:
     arg = get_transferred_argument()
     cur_name = validate_transferred_argument(arg)
     target_path = cur_name.parent
-    config = parse_config(read_config(target_path), target_path=target_path)
+    config = parse_config(read_config(target_path), section=cur_name.stem, target_path=target_path)
     new_name = add_date_to_filename(cur_name)
     cprint(f'20Архивируем файл ^14_{str(cur_name)} ^20_с новым именем ^13_{str(new_name.name)}')
     archive = add_to_archive(config, cur_name=cur_name, new_name=new_name)
@@ -127,7 +128,7 @@ if __name__ == '__main__':
         err.process_critical_exception()
     except Exception as e:
         logger.critical(e)  # __str__()
-        # raise e
+        raise e
         err.process_critical_exception()
     # input()
     exit_from_program(code=0, close=True)

@@ -1,3 +1,8 @@
 [main]
 path_to_archive = 'Архивы'
 archive_name = 'supertest'
+
+
+[test_other]
+path_to_archive = 'Архивы'
+archive_name = ''

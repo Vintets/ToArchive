@@ -31,9 +31,16 @@ Optional config file in file folder!
 [main]
 path_to_archive = 'Архивы'
 archive_name = 'supertest'
+
+[filename]
+path_to_archive = 'Архивы'
+archive_name = 'filename'
+...
 ```
 ``path_to_archive`` : Path to archive (foldername)  
 ``archive_name`` : New archive name (is empty - default = filename)  
+``[main]`` : default section  
+``[filename]`` : section -  rule for filename    
 
 
 
