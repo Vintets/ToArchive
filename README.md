@@ -40,7 +40,8 @@ archive_name = 'filename'
 ``path_to_archive`` : Path to archive (foldername)  
 ``archive_name`` : New archive name (is empty - default = filename)  
 ``[main]`` : default section  
-``[filename]`` : section -  rule for filename    
+``[filename]`` : section -  rule for filename  
+- !NOTE - if section name contains spaces, use quotes ['filename']
 
 
 

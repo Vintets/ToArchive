@@ -6,6 +6,7 @@ cd %YandexDisk%/_Projects_Py/ToArchive
 
 # запуск
 python ToArchive.py test.txt
+python ToArchive.py "test spaces.txt"
 python %YandexDisk%/_Projects_Py/ToArchive/ToArchive.py test.txt
 
 

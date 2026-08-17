@@ -2,7 +2,10 @@
 path_to_archive = 'Архивы'
 archive_name = 'supertest'
 
-
 [test_other]
 path_to_archive = 'Архивы'
 archive_name = ''
+
+['Эл. Почта Тайм']
+path_to_archive = '_Эл. Почта Тайм'
+archive_name = '_Эл. Почта Тайм_Архив'
