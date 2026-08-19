@@ -41,7 +41,7 @@ archive_name = 'filename'
 ``archive_name`` : New archive name (is empty - default = filename)  
 ``[main]`` : default section  
 ``[filename]`` : section -  rule for filename  
-- !NOTE - if section name contains spaces, use quotes ['filename']
+- !NOTE - if section name contains spaces or unicode, use quotes ['filename']
 
 
 
