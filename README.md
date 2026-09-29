@@ -19,6 +19,7 @@ pip3 install -r requirements.txt
 ```
 Используется
 ```py7zr```
+```pywin32```
 
 
 ## Конфигурирование Configuration
@@ -52,7 +53,7 @@ archive_name = 'filename'
 ```bash
 python ToArchive.py <file>
 ```
-- аргумент `file` передаётся путь к файлу
+- аргумент `file` передаётся путь к файлу/ярлыку
 
 
 ____

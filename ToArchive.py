@@ -25,6 +25,7 @@ from accessory import (add_date_to_filename, authorship, check_version, cprint,
                        create_dirs, exit_from_program, init_console, logger)
 import errors as err
 import py7zr
+import win32com.client
 
 
 CONFIG_FILE = 'config.toml'
@@ -42,10 +43,34 @@ def get_transferred_argument() -> str:
 def validate_transferred_argument(arg: str) -> Path:
     file_in = Path(arg)
     if not file_in.exists():
-        raise err.FileNotExistError(str(file_in))
+        # if lnk file
+        file_in_lnk = Path(f'{arg}.lnk')
+        if not file_in_lnk.exists():
+            raise err.FileNotExistError(str(file_in))
+        else:
+            file_in = file_in_lnk
     elif not file_in.is_file():
         raise err.ArgumentIsNotFileError(str(file_in))
     return file_in
+
+
+def validate_target_file_in_link(file_in_lnk: Path) -> None:
+    if not file_in_lnk.exists():
+        raise err.FileNotExistError(str(file_in_lnk), ext_info='По ссылке (ярлыку) ')
+    elif not file_in_lnk.is_file():
+        raise err.ArgumentIsNotFileError(str(file_in_lnk))
+
+
+def is_link(file_in: Path) -> Path:
+    if file_in.suffix == '.lnk':
+        shell = win32com.client.Dispatch('WScript.Shell')
+        shortcut = shell.CreateShortCut(str(file_in))
+        target_file = Path(shortcut.TargetPath)
+        validate_target_file_in_link(target_file)
+        print(f'Ярлык содержит путь:\n{target_file}')
+    else:
+        target_file = file_in
+    return target_file
 
 
 @lru_cache
@@ -94,8 +119,11 @@ def add_to_archive(config: dict[str, Any], cur_name: Path, new_name: Path) -> Pa
 
 def main() -> None:
     arg = get_transferred_argument()
-    cur_name = validate_transferred_argument(arg)
-    target_path = cur_name.parent
+    file_in = validate_transferred_argument(arg)
+    cur_name = is_link(file_in)
+    print(f'{file_in}')
+    print(f'{cur_name}')
+    target_path = file_in.parent
     config = parse_config(read_config(target_path), section=cur_name.stem, target_path=target_path)
     new_name = add_date_to_filename(cur_name)
     cprint(f'20Архивируем файл ^14_{str(cur_name)} ^20_с новым именем ^13_{str(new_name.name)}')

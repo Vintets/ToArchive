@@ -6,6 +6,8 @@
 #
 py7zr==1.1.3
     # via -r requirements_312_win_core.in
+pywin32==312
+    # via -r requirements_312_win_core.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

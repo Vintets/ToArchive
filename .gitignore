@@ -28,6 +28,7 @@ venv.bak/
 # Project files
 test.txt
 test_*.txt
+*.lnk
 
 # Simlinks
 

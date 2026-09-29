@@ -34,9 +34,9 @@ class ArgumentIsNotFileError(Exception):
 
 class FileNotExistError(Exception):
     """Error argument file not exist."""
-    def __init__(self, file_in: str) -> None:
-        super().__init__(file_in)
-        self.msg = f"Файл '{file_in}' не существует!"
+    def __init__(self, file_in: str, ext_info: str = '') -> None:
+        super().__init__(file_in, ext_info)
+        self.msg = f"{ext_info}Файл '{file_in}' не существует!"
 
     def __str__(self) -> str:
         return self.msg
