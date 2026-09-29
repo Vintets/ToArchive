@@ -30,6 +30,7 @@ import win32com.client
 
 CONFIG_FILE = 'config.toml'
 CONFIG_MAIN_SECTION = 'main'
+DEFAULT_CONFIG = {'main': {'path_to_archive': '', 'archive_name': ''}}
 
 
 def get_transferred_argument() -> str:
@@ -81,7 +82,7 @@ def read_config(target_path: Path) -> dict[str, Any]:
             _ = config[CONFIG_MAIN_SECTION]
     except FileNotFoundError:
         print('Файл конфига не найден')
-        config = {}
+        config = DEFAULT_CONFIG
     except KeyError:
         raise err.NotSECTIONError(CONFIG_MAIN_SECTION, tuple(config.keys()))
     return config
@@ -121,8 +122,6 @@ def main() -> None:
     arg = get_transferred_argument()
     file_in = validate_transferred_argument(arg)
     cur_name = is_link(file_in)
-    print(f'{file_in}')
-    print(f'{cur_name}')
     target_path = file_in.parent
     config = parse_config(read_config(target_path), section=cur_name.stem, target_path=target_path)
     new_name = add_date_to_filename(cur_name)
