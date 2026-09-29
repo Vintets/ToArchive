@@ -8,8 +8,8 @@ except ModuleNotFoundError:
     from pathlib import Path
 
     class FakerConf:
-        PATH_LOGS_ERR = Path('.')
         PATH_LOGS = Path(__file__).parent.parent / 'logs'
+        PATH_LOGS_ERR = Path(__file__).parent.parent / 'logs'
         LOGGER_PREFIX = 'to_archive'
         LOGGER_NAME_MODULE = True
     config: FakerConf = FakerConf  # type: ignore [no-redef]
@@ -40,7 +40,7 @@ logger.add(sys.stdout, format=new_format, filter=lambda record: record['level'].
 # добавляем логгеры с дефолтным форматированием для вывода в файлы
 logger.add(FILENAME_LOG_MAIN,
            filter=lambda record: record['level'].no <= 30,
-           rotation='00:00',
+           rotation='1 MB',
            compression='zip',
            delay=True)
 logger.add(FILENAME_LOG_ERR,
